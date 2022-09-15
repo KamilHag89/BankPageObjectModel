@@ -1,9 +1,14 @@
 from Data.drivers import chrome
-from Classes.MainPage import MainPage
+from Pages.MainPage import MainPage
+from Pages.RegisterPage import RegisterPage
 from Data.Locators import mainUrl
+from Data.TestUser import User
 
-test = MainPage(chrome, mainUrl)
-test.mainOpen()
-test.map.userName.send_keys("asddas")
-test.map.password.send_keys("asdasd")
-test.map.logInBtn.click()
+
+user = User()
+test = RegisterPage(chrome, mainUrl)
+test.openRegisterForm()
+test.nameInput.send_keys(user.name)
+test.lastNameInput.send_keys(user.lastname)
+test.adressInput.send_keys(user.adress)
+test.registerBtn.click()

@@ -31,3 +31,8 @@ class MainPageLoc:
     @property
     def logInBtn(self):
         return self.returnElement(By.CLASS_NAME, "button")
+
+    @property
+    def register(self):
+        return self.returnElement(By.LINK_TEXT, "Register")
+

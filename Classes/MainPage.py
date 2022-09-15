@@ -2,12 +2,10 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-from Data.Locators import mainUrl
-
 
 class MainPage:
-    def __init__(self, driver):
-        self.address = mainUrl
+    def __init__(self, driver, url):
+        self.address = url
         self.driver = driver
         self.map = MainPageLoc(driver)
 
@@ -19,14 +17,17 @@ class MainPageLoc:
     def __init__(self, driver):
         self.driver = driver
 
+    def returnElement(self, method, target):
+        return WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((method, target)))
+
     @property
     def userName(self):
-        return WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.NAME, "username")))
+        return self.returnElement(By.NAME, "username")
 
     @property
     def password(self):
-        return WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.NAME, "password")))
+        return self.returnElement(By.NAME, "password")
 
     @property
     def logInBtn(self):
-        return WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, "button")))
+        return self.returnElement(By.CLASS_NAME, "button")
